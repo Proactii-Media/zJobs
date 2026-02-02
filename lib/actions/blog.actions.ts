@@ -11,7 +11,6 @@ export async function createBlog(blogData: IBlogInput) {
 
     const newBlog = await Blog.create(blogData);
 
-    // ✅ MUST be BEFORE return
     revalidatePath("/blog");
     revalidatePath("/");
 
@@ -67,7 +66,6 @@ export async function updateBlog(id: string, updateData: Partial<IBlog>) {
       throw new Error("Blog not found");
     }
 
-    // ✅ BEFORE return
     revalidatePath("/blog");
     revalidatePath(`/blog/${id}`);
     revalidatePath("/");
@@ -89,8 +87,7 @@ export async function deleteBlog(id: string) {
     if (!deletedBlog) {
       throw new Error("Blog not found");
     }
-
-    // ✅ BEFORE return
+    
     revalidatePath("/blog");
     revalidatePath("/");
 
