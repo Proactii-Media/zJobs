@@ -3,6 +3,7 @@
 import Blog, { IBlog, IBlogInput } from "../models/blog.model";
 import { connectToDB } from "../mongodb";
 import { revalidatePath } from "next/cache";
+import { unstable_noStore as noStore } from "next/cache";
 
 //* Create a new blog post
 export async function createBlog(blogData: IBlogInput) {
@@ -23,6 +24,8 @@ export async function createBlog(blogData: IBlogInput) {
 
 //* Get all blog posts
 export async function getBlogs() {
+  noStore(); 
+
   try {
     await connectToDB();
     const blogs = await Blog.find({ isActive: true })
