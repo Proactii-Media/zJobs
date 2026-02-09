@@ -25,7 +25,7 @@ export async function createBlog(blogData: IBlogInput) {
 export async function getBlogs() {
   try {
     await connectToDB();
-    const blogs = await Blog.find({})
+    const blogs = await Blog.find({ isActive : true })
       .sort({ createdAt: -1 })
       .lean();
 
