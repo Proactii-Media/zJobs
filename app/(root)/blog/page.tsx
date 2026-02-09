@@ -32,6 +32,9 @@ export const metadata: Metadata = {
 // Keep page dynamic
 export const dynamic = "force-dynamic";
 
+export const runtime = "nodejs";
+
+
 // Blog type
 interface Blog {
   _id: string;
