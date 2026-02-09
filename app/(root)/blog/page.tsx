@@ -4,7 +4,6 @@ import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { getBlogs } from "@/lib/actions/blog.actions";
-import { unstable_noStore as noStore } from "next/cache";
 
 import {
   Breadcrumb,
@@ -35,11 +34,7 @@ interface Blog {
   metaKeywords?: string;
 }
 
-export const dynamic = "force-dynamic";
-
-export async function generateMetadata(): Promise<Metadata> {
-  noStore(); 
-  
+export async function generateMetadata(): Promise<Metadata> { 
   const blogs = (await getBlogs()) as Blog[];
 
   const titles = blogs.map((blog) => blog.metaTitle).join(", ");
