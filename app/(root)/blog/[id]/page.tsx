@@ -13,16 +13,15 @@ import { CalendarDays, User } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { unstable_noStore as noStore } from "next/cache";
 
 export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
 
 export async function generateMetadata({
   params,
 }: {
   params: { id: string };
 }): Promise<Metadata> {
-  noStore();
   
   const post = await getBlogById(params.id);
 
