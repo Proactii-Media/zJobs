@@ -2,17 +2,19 @@
 
 import Blog, { IBlog, IBlogInput } from "../models/blog.model";
 import { connectToDB } from "../mongodb";
-import { revalidatePath } from "next/cache";
+import { unstable_cache, revalidateTag } from "next/cache";
 
-//* Create a new blog post
+/* ---------------------------------------
+   Create Blog
+---------------------------------------- */
 export async function createBlog(blogData: IBlogInput) {
   try {
     await connectToDB();
 
     const newBlog = await Blog.create(blogData);
 
-    revalidatePath("/blog");
-    revalidatePath("/");
+    // 🔥 Invalidate blog cache
+    revalidateTag("blogs");
 
     return JSON.parse(JSON.stringify(newBlog));
   } catch (error) {
@@ -21,25 +23,33 @@ export async function createBlog(blogData: IBlogInput) {
   }
 }
 
-//* Get all blog posts
-export async function getBlogs() {
-  try {
+/* ---------------------------------------
+   Get Blogs (CACHED + TAGGED)
+---------------------------------------- */
+export const getBlogs = unstable_cache(
+  async () => {
     await connectToDB();
-    const blogs = await Blog.find({ isActive : true })
+
+    const blogs = await Blog.find({ isActive: true })
       .sort({ createdAt: -1 })
       .lean();
 
     return JSON.parse(JSON.stringify(blogs));
-  } catch (error) {
-    console.error("Failed to fetch blogs:", error);
-    throw new Error("Failed to fetch blogs");
+  },
+  ["blogs"],
+  {
+    tags: ["blogs"], // 👈 REQUIRED for Vercel
+    revalidate: 60,  // ISR fallback
   }
-}
+);
 
-//* Get a single blog by ID
+/* ---------------------------------------
+   Get Single Blog
+---------------------------------------- */
 export async function getBlogById(id: string) {
   try {
     await connectToDB();
+
     const blog = await Blog.findById(id).lean();
 
     if (!blog) {
@@ -53,7 +63,9 @@ export async function getBlogById(id: string) {
   }
 }
 
-//* Update a blog post
+/* ---------------------------------------
+   Update Blog
+---------------------------------------- */
 export async function updateBlog(id: string, updateData: Partial<IBlog>) {
   try {
     await connectToDB();
@@ -66,9 +78,8 @@ export async function updateBlog(id: string, updateData: Partial<IBlog>) {
       throw new Error("Blog not found");
     }
 
-    revalidatePath("/blog");
-    revalidatePath(`/blog/${id}`);
-    revalidatePath("/");
+    // 🔥 Invalidate blog cache
+    revalidateTag("blogs");
 
     return JSON.parse(JSON.stringify(updatedBlog));
   } catch (error) {
@@ -77,7 +88,9 @@ export async function updateBlog(id: string, updateData: Partial<IBlog>) {
   }
 }
 
-//* Delete a blog post
+/* ---------------------------------------
+   Delete Blog
+---------------------------------------- */
 export async function deleteBlog(id: string) {
   try {
     await connectToDB();
@@ -87,9 +100,9 @@ export async function deleteBlog(id: string) {
     if (!deletedBlog) {
       throw new Error("Blog not found");
     }
-    
-    revalidatePath("/blog");
-    revalidatePath("/");
+
+    // 🔥 Invalidate blog cache
+    revalidateTag("blogs");
 
     return JSON.parse(JSON.stringify(deletedBlog));
   } catch (error) {
