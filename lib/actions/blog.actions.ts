@@ -41,6 +41,8 @@ export async function getBlogs() {
 
 //* Get a single blog by ID
 export async function getBlogById(id: string) {
+  noStore();
+  
   try {
     await connectToDB();
     const blog = await Blog.findById(id).lean();
