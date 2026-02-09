@@ -129,7 +129,7 @@ const Hero: React.FC = () => {
             className="text-4xl md:text-6xl font-bold mb-4 text-white"
             variants={itemVariants}
           >
-            Discover Your
+            Explore Your
             <span className="block md:inline bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent md:ml-4 mt-2 md:mt-0">
               Dream Job
             </span>
