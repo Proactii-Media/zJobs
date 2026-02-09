@@ -76,7 +76,7 @@ export default async function BlogPage() {
       <div className="mt-10 flex flex-col items-center justify-center">
         <h1 className="text-4xl font-bold text-neutral-700">IT Blog</h1>
         <p className="sm:w-1/3 text-center text-gray-500 text-base py-3">
-          Explore the NanoSoft IT Blog for valuable insights and thought
+          Explore the IT Blog for valuable insights and thought
           leadership on industry best practices in managed IT services and
           enterprise IT trends.
         </p>
