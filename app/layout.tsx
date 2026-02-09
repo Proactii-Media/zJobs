@@ -9,7 +9,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Z jobs | Job Search ",
+  title: "Z jobs | Job Search Platform",
   description:
     "Find your dream job with our advanced job search platform. Search by location, job type, and more.",
   metadataBase: new URL("https://zjobs-nine.vercel.app"),
