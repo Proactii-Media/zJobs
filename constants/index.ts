@@ -29,11 +29,11 @@ export const adminSidebarLinks = [
     route: "/admin/company",
     icon: Factory,
   },
-  {
-    label: " General Applications",
-    route: "/admin/generalApplications",
-    icon: User,
-  },
+  // {
+  //   label: " General Applications",
+  //   route: "/admin/generalApplications",
+  //   icon: User,
+  // },
   {
     label: "Job Applications",
     route: "/admin/jobApplications",

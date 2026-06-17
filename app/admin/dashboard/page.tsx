@@ -33,7 +33,7 @@ const DashboardPage = () => {
     blogCount: 0,
     jobApplicationCount: 0,
     jobCount: 0,
-    generalApplicationCount: 0,
+    // generalApplicationCount: 0,
     totalCompanyCount: 0,
     loading: true,
   });
@@ -46,27 +46,27 @@ const DashboardPage = () => {
         blogRes,
         jobApplicationRes,
         jobRes,
-        generalApplicationRes,
+        // generalApplicationRes,
         companyDataRes,
       ] = await Promise.all([
         fetch("/api/blog"),
         fetch("/api/jobApplication"),
         fetch("/api/jobs"),
-        fetch("/api/generalApplications"),
+        // fetch("/api/generalApplications"),
         fetch("/api/company"),
       ]);
 
       const blogData = await blogRes.json();
       const jobApplicationData = await jobApplicationRes.json();
       const jobData = await jobRes.json();
-      const generalApplicationData = await generalApplicationRes.json();
+      // const generalApplicationData = await generalApplicationRes.json();
       const companyData = await companyDataRes.json();
 
       setDashboardData({
         blogCount: blogData.length,
         jobApplicationCount: jobApplicationData.count,
         jobCount: jobData.length,
-        generalApplicationCount: generalApplicationData.length,
+        // generalApplicationCount: generalApplicationData.length,
         totalCompanyCount: companyData.length,
         loading: false,
       });
@@ -111,10 +111,10 @@ const DashboardPage = () => {
       value: dashboardData.totalCompanyCount,
     },
     { name: "Jobs Posted", value: dashboardData.jobCount },
-    {
-      name: "General Applications",
-      value: dashboardData.generalApplicationCount,
-    },
+    // {
+    //   name: "General Applications",
+    //   value: dashboardData.generalApplicationCount,
+    // },
     { name: "Job Applications", value: dashboardData.jobApplicationCount },
   ];
 
@@ -137,13 +137,13 @@ const DashboardPage = () => {
       route: "/admin/company",
       color: "text-orange-500",
     },
-    {
-      title: "General Applications",
-      value: dashboardData.generalApplicationCount,
-      icon: User,
-      route: "/admin/generalApplications",
-      color: "text-green-500",
-    },
+    // {
+    //   title: "General Applications",
+    //   value: dashboardData.generalApplicationCount,
+    //   icon: User,
+    //   route: "/admin/generalApplications",
+    //   color: "text-green-500",
+    // },
     {
       title: "Job Applications",
       value: dashboardData.jobApplicationCount,
