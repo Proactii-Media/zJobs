@@ -19,7 +19,7 @@ import {
   BriefcaseIcon,
   UsersIcon,
   PencilLine,
-  User,
+  // User,
   ActivityIcon,
   RefreshCwIcon,
   Factory,
