@@ -96,11 +96,9 @@ export default async function Blog() {
       {/* Blog intro */}
       <div className="mt-10">
         <div className="flex flex-col items-center justify-center">
-          <h1 className="text-4xl font-bold text-neutral-700">IT Blog</h1>
+          <h1 className="text-4xl font-bold text-neutral-700">HR & Career Insights</h1>
           <p className="sm:w-1/3 text-center text-gray-500 text-base py-3">
-            Explore the NanoSoft IT Blog for valuable insights and thought
-            leadership on industry best practices in managed IT services and
-            enterprise IT trends.
+          Explore the Z JOBS Blog for HR insights, recruitment updates, career guidance, interview tips, and expert advice to help job seekers and businesses grow.
           </p>
         </div>
       </div>
